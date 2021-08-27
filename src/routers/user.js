@@ -20,15 +20,19 @@ const upload = multer({
 
 //delete user avatar
 userRouter.delete('/users/me/avatar', auth, async (req, res) => {
-    req.user.avatar = undefined
-    await req.user.save()
-    res.status(200).send()
+    try {
+        req.user.avatar = undefined
+        await req.user.save()
+        res.status(200).send()
+    } catch (e) {
+        res.status(401).send()
+    }
+
 })
 
 //upload user avatar
 userRouter.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) => {
     const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).png().toBuffer()
-    console.log('on upload')
     req.user.avatar = buffer
     await req.user.save()
     res.status(200).send()
@@ -108,9 +112,9 @@ userRouter.delete('/users/me', auth, async (req, res) => {
     try {
         await req.user.remove()
         sendCancelationEmail(req.user.email, req.user.name)
-        res.send(req.user)
+        res.status(200).send(req.user)
     } catch (e) {
-        res.status(400).send(e)
+        res.status(401).send()
     }
 })
 
@@ -118,7 +122,7 @@ userRouter.post('/users/login', async (req, res) => {
     try {
         const user = await User.loginWithCredential(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
-        res.status(201).send({ user, token })
+        res.status(200).send({ user, token })
     } catch (e) {
         res.status(400).send(e)
     }

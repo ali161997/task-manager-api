@@ -9,12 +9,17 @@ const sendWelcomeEmail = (email, name) => {
     })
 }
 const sendCancelationEmail = (email, name) => {
-    sgEmail.send({
-        to: email,
-        from: 'alihashem431@gmail.com',
-        subject: 'Let us know your feed back',
-        text: `thank you ,${name} at all`,
-    })
+
+    try {
+        sgEmail.send({
+            to: email,
+            from: 'alihashem431@gmail.com',
+            subject: 'Let us know your feed back',
+            text: `thank you ,${name} at all`,
+        })
+    } catch (e) {
+        console.log(e)
+    }
 }
 module.exports = {
     sendWelcomeEmail,

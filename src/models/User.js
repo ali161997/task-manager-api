@@ -89,7 +89,6 @@ userSchema.statics.loginWithCredential = async (email, password) => {
 }
 //hash password before saving
 userSchema.pre('save', async function (next) {
-    console.log('in pre save')
     const user = this
     if (user.isModified('password'))
         user.password = await bcrypt.hash(user.password, 8)
