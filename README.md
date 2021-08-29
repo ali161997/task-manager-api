@@ -2,7 +2,7 @@
 
 task manager API is for recording tasks to accomplish, when accomplishing you can refer update it as completed 
 
-that project have been built with NodeJS/Express server framwork and MongoDB database
+this project has been built with NodeJS/Express server framwork and MongoDB database
 
 Hosted to domain
 https://hashem-task-manager.herokuapp.com
