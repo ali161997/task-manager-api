@@ -1,6 +1,6 @@
 # task-manager-api
 
-task manager API is for recording tasks to accomplish when accomplishing you can refer update it as completed 
+task manager API is for recording tasks to accomplish, when accomplishing you can refer update it as completed 
 
 that project have been built with NodeJS/Express server framwork and MongoDB database
 
